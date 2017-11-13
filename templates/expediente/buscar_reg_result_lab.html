@@ -1,0 +1,31 @@
+{% extends 'base/base.html'%}
+
+{% block content %}
+<table>
+	<caption>RESULTADOS QUE COINCIDEN CON LA BUSQUEDA</caption>
+	<thead>
+		<tr>
+			<th>Fecha de Registro</th>
+			<th>Tipo de Evaluacion</th>
+			<th>Numero de Expediente de Paciente</th>
+			<th>Encargado/a de Registro de Laboratorio</th>
+			<th>Descripcion de Resultados</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% if encontrado %}<!--verificando que el contenido del contexto este lleno-->
+		{% for list_enc in encontrado %}
+		<tr>
+			<td>{{list_enc.fechaResultado}}</td>
+			<td>{{list_enc.CatalogoTipoExamen.nombreExamen}}</td>
+			<td>{{list_enc.Expediente.numeroArchivo}}</td>
+			<td>{{list_enc.Empleado.Persona.primerApellido}} {{list_enc.Empleado.Persona.segundoApellido}} {{list_enc.Empleado.Persona.primerNombre}} {{list_enc.Empleado.Persona.segundoNombre}}</td>
+			<td>{{list_enc.descripcionResultado}}</td>
+		</tr>
+		{% endfor %}
+		{% else %}
+		<h1>No Existen Registros de Resultados de Examenes de Laboratorio que coincidan con el criterio de busqueda</h1>
+		{% endif %}
+	</tbody>
+</table>
+{% endblock %}

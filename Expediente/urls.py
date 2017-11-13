@@ -18,5 +18,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    # en la sentencia siguiente colocarle ^expediente$
     url(r'^', include('apps.expediente.urls',namespace="expediente"))#mediante esta sentencia permite buscar las vistas de la app expediente mediante el namespace
 ]

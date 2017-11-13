@@ -1,5 +1,13 @@
 {% extends 'base/base.html' %}
 {% block content %}
+<form action="/buscar" method="POST" accept-charset="utf-8">
+	{% csrf_token %}<!--token de seguridad-->
+	<input type="text" name="Busqueda" value="" placeholder="Ingrese id de expediente. Ejemplo: '1' ">
+	<!--name="Busqueda" sera el nombre de la variable que contenga el valor o parametro a buscar-->
+<div>
+	<button type="submit">Buscar</button>
+</div>
+</form><br>
 <table>
 	<caption>LISTADO DE REGISTROS DE RESULTADOS DE EVALUACIONES
 	</caption>
@@ -8,18 +16,18 @@
 			<th>Fecha de Registro</th>
 			<th>Tipo de Evaluacion</th>
 			<th>Numero de Expediente de Paciente</th>
-			<th>Encargado de Registro</th>
+			<th>Encargado/a de Registro de Laboratorio</th>
 			<th>Descripcion de Resultados</th>
 		</tr>
 	</thead>
 	<tbody>
-		{% if listado %}<!--la variable listado contiene el contexto enviado por la funcion de vista ver_listado_reg_result_lab-->
-		{% for listado in listado %}
+		{% if object_list %}<!--ahora se utiliza un view de clase-->
+		{% for listado in object_list %}
 		<tr>
 			<td>{{listado.fechaResultado}}</td>
 			<td>{{listado.CatalogoTipoExamen.nombreExamen}}</td>
 			<td>{{listado.Expediente.numeroArchivo}}</td>
-			<td>{{listado.Empleado.Persona.primerNombre}} {{listado.Empleado.Persona.segundoNombre}} {{listado.Empleado.Persona.primerApellido}} {{listado.Empleado.Persona.segundoApellido}}</td>
+			<td>{{listado.Empleado.Persona.primerApellido}} {{listado.Empleado.Persona.segundoApellido}} {{listado.Empleado.Persona.primerNombre}} {{listado.Empleado.Persona.segundoNombre}}</td>
 			<td>{{listado.descripcionResultado}}</td>
 		</tr>
 		{% endfor %}

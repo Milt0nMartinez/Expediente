@@ -25,7 +25,7 @@ class FormResultLab(forms.ModelForm):
 
 		widgets={
 					'fechaResultado':forms.TextInput(),
-					'descripcionResultado':forms.TextInput(),
+					'descripcionResultado':forms.Textarea(),
 					'Expediente':forms.Select(),
 					'CatalogoTipoExamen':forms.Select(),
 					'Empleado':forms.Select(),

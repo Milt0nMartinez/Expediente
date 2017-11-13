@@ -19,6 +19,8 @@ class Persona(models.Model):
     telefonoMovil = models.CharField(max_length = 15)
     correoElectronico = models.EmailField()
 
+    
+
 class Direccion(models.Model):
     detalleDireccion = models.TextField(max_length = 100)
     Persona = models.OneToOneField(Persona, null = False, blank = False, on_delete = models.CASCADE)
@@ -35,6 +37,9 @@ class Empleado(models.Model):
     jVPM = models.IntegerField()
     Persona = models.OneToOneField(Persona, null = False, blank = False, on_delete = models.CASCADE)
     CatalogoEspecialidadEmpleado = models.ForeignKey(CatalogoEspecialidadEmpleado, null = True, blank = True, on_delete = models.CASCADE)
+
+    def __str__(self):
+        return '{} {},{} {}'.format(self.Persona.primerApellido,self.Persona.segundoApellido,self.Persona.primerNombre,self.Persona.segundoNombre)#funcion para mostrar los nombres de los objetos.
 
 class Turno(models.Model):
    fechaInicio = models.DateField()
